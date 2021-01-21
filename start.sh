@@ -100,33 +100,33 @@ sysctl -w vm.max_map_count=262144
 source .env
 export $(cut -d= -f1 .env)
 
-echo "## GENERATING RANDOM PASSWORD FOR POSTGRES AND RABBITMQ ##"
+#echo "## GENERATING RANDOM PASSWORD FOR POSTGRES AND RABBITMQ ##"
 # RabbitMQ
 # Generate and set random password for “POSTGRES_PASSWORD” in .env
-POSTGRES_PASSWORD="$(openssl rand -base64 12)"
-sed -i "s|POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$POSTGRES_PASSWORD|g" .env
+#POSTGRES_PASSWORD="$(openssl rand -base64 12)"
+#sed -i "s|POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$POSTGRES_PASSWORD|g" .env
 
 # Generate and set random password for “RABBITMQ_DEFAULT_PASS” in .env
-RABBITMQ_DEFAULT_PASS="$(openssl rand -base64 12)"
-sed -i "s|RABBITMQ_DEFAULT_PASS=.*|RABBITMQ_DEFAULT_PASS=$RABBITMQ_DEFAULT_PASS|g" .env
+#RABBITMQ_DEFAULT_PASS="$(openssl rand -base64 12)"
+#sed -i "s|RABBITMQ_DEFAULT_PASS=.*|RABBITMQ_DEFAULT_PASS=$RABBITMQ_DEFAULT_PASS|g" .env
 
 # Generate and set random password for “RABBITMQ_DEFAULT_PASS” in .env
-RABBITMQ_AGENT_PASS="$(openssl rand -base64 12)"
-sed -i "s|RABBITMQ_AGENT_PASS=.*|RABBITMQ_AGENT_PASS=$RABBITMQ_AGENT_PASS|g" .env
+#RABBITMQ_AGENT_PASS="$(openssl rand -base64 12)"
+#sed -i "s|RABBITMQ_AGENT_PASS=.*|RABBITMQ_AGENT_PASS=$RABBITMQ_AGENT_PASS|g" .env
 
 
-echo "PLACE THIS FX_IAM KEY "${RABBITMQ_AGENT_PASS}"  IN HOMEPAGE->Administrator(Default)->Settings-><FX_IAM* Field> OF WEB_URL AFTER LOGIN "
-#echo "## ENTER STACK NAME TAG ##"
-read -p "Enter stack name tag: " StackName
+#echo "PLACE THIS FX_IAM KEY "${RABBITMQ_AGENT_PASS}"  IN HOMEPAGE->Administrator(Default)->Settings-><FX_IAM* Field> OF WEB_URL AFTER LOGIN "
+##echo "## ENTER STACK NAME TAG ##"
+#read -p "Enter stack name tag: " StackName
 
 echo "## DEPLOYING POSTGRES, ELASTICSEARCH & RABBITMQ SERVICES  ##"
 # Run Docker stack deploy
-docker stack deploy -c fx-security-enterprise-data.yaml "$StackName"
+docker stack deploy -c docker-compose.yaml dev
 
 sleep 30
 
 # RabbitMQ Scanbot password (These commands need to executed on RabbitMQ container)
-docker exec $(docker ps -q -f name=fx-rabbitmq) rabbitmqctl add_user fx_bot_user ${RABBITMQ_AGENT_PASS}
+docker exec $(docker ps -q -f name=fx-rabbitmq) rabbitmqctl add_user fx_bot_user admin
 docker exec $(docker ps -q -f name=fx-rabbitmq) rabbitmqctl set_permissions -p fx fx_bot_user "" ".*" ".*"
 
 echo "## DEPLOYING CONTROL-PLANE SERVICE ##"
@@ -141,9 +141,9 @@ echo "## DEPLOYING CONTROL-PLANE SERVICE ##"
 
 #echo "## GENERATING PEM FILE FOR HAPROXY ##"
 #sudo cat /fx-security-enterprise/haproxy/fxcloud.crt /fx-security-enterprise/haproxy/fxcloud.key \ | sudo tee /fx-security-enterprise/haproxy/fxcloud.pem
-sleep 10
+#sleep 10
 
-echo "## DEPLOYING HAPROXY SERVICE ##"
+#echo "## DEPLOYING HAPROXY SERVICE ##"
 #docker stack deploy -c fx-security-enterprise-haproxy.yaml "$StackName"
 
 #sleep 10
