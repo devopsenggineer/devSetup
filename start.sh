@@ -6,7 +6,7 @@ sudo apt update
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo systemctl status docker
+#sudo systemctl status docker
 
 echo "## ACTIVATING DOCKER-SWARM MODE ##"
 #2.	Activate docker-swarm mode
