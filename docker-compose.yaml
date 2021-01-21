@@ -16,7 +16,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     command: postgres -c 'shared_buffers=256MB' -c 'max_connections=300'
     volumes:
-      - /fx-security-enterprise/postgres/data:/var/lib/postgresql/data
+      - /dev-setup/postgres/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     logging:
@@ -39,7 +39,7 @@ services:
     environment:
       - ES_JAVA_OPTS=${ELASTICSEARCH_MEM}
     volumes:
-      - /fx-security-enterprise/elasticsearch/data:/usr/share/elasticsearch/data
+      - /dev-setup/elasticsearch/data:/usr/share/elasticsearch/data
     configs:
       - source: elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
@@ -69,7 +69,7 @@ services:
       - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_DEFAULT_VHOST}
       - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=${RABBITMQ_VM_MEMORY_HIGH_WATERMARK}
     volumes:
-      - /fx-security-enterprise/rabbitmq/data:/var/lib/rabbitmq
+      - /dev-setup/rabbitmq/data:/var/lib/rabbitmq
     ports:
       - 5672:5672
       - 5671:5671
@@ -83,10 +83,7 @@ services:
     # create vhost, user-cp,
     # TODO user-mail, user-sync, user-bot
 
-#volumes:
-#  pgdata:
-#  esdata:
-#  mqdata:
+
 configs:
   elasticsearch.yml:
     external: true
