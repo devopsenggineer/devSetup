@@ -41,7 +41,7 @@ echo "## DEPLOYING POSTGRES, ELASTICSEARCH & RABBITMQ SERVICES  ##"
 # Run Docker stack deploy
 docker stack deploy -c docker-compose.yaml dev
 
-sleep 30
+sleep 40
 
 # RabbitMQ Scanbot password (These commands need to executed on RabbitMQ container)
 docker exec $(docker ps -q -f name=fx-rabbitmq) rabbitmqctl add_user fx_bot_user admin
