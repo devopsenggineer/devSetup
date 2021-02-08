@@ -29,6 +29,8 @@ mkdir -p /dev-setup/rabbitmq/data
 
 docker config create elasticsearch.yml elasticsearch.yml
 
+echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+
 sysctl -w vm.max_map_count=262144
 source .env
 export $(cut -d= -f1 .env)
