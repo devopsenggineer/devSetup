@@ -70,6 +70,8 @@ services:
       - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=${RABBITMQ_VM_MEMORY_HIGH_WATERMARK}
     volumes:
       - /dev-setup/rabbitmq/data:/var/lib/rabbitmq
+      - ./rabbitmq-ssl/:/etc/rabbitmq/
+#      - ./rabbitmq-ssl/:/etc/rabbitmq/
     ports:
       - 5672:5672
       - 5671:5671
