@@ -52,7 +52,7 @@ Step 4: Verify runing elasticsearch instance and existing indices in that elasti
         curl -s -X GET 'http://localhost:9200/_cat/indices/%2A?v=&s=index:desc'
 Step 5: Give executable permission to reindex-elasticsearch.sh file by running below command
         
-        sudo chmod +x reindex-elasticsearch.sh
+        chmod +x reindex-elasticsearch.sh
         
 Step 6: Reindex indices of elasticsearch 5 into elasticsearch-6  run below  command to execute reindex-elasticsearch.sh script
     
