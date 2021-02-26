@@ -29,6 +29,8 @@ services:
   fx-elasticsearch:
 #    image: elasticsearch:5
     image: elasticsearch:5.0.0
+#    image: elasticsearch:6.8.13
+#    image: elasticsearch:7.6.2
     deploy:
       restart_policy:
         condition: on-failure
