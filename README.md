@@ -11,7 +11,8 @@ Step 2: Execute the script and start dev-setup by running below command
         ./start.sh
         
         
-To upgrade elasticsearch from version 5.0.0 to version 7.6.2 and retain data/indices of elasticsearch of version 5.0.0, first we have to reindex indices of es version 5.0.0 with any elasticsearch version 6.x and then after reindexing we should move to es version 7.
+To upgrade elasticsearch from version 5.0.0 to version 7.6.2 and retain data/indices of elasticsearch of version 5.0.0
+first we have to reindex indices of es version 5.0.0 with any elasticsearch version 6.x and then after reindexing we should move to es version 7.
 
 Follow below steps achieve above scenario
 
