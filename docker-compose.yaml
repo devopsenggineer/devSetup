@@ -55,7 +55,8 @@ services:
         tag: "{{.Name}}/{{.ID}}"
 
   fx-rabbitmq:
-    image: rabbitmq:3.7-management
+    image: rabbitmq:3-management
+    #image: rabbitmq:3.7-management
     hostname: fx_rabbitmq_stg
     deploy:
       restart_policy:
